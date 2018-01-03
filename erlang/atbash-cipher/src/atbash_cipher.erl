@@ -11,11 +11,8 @@ plain_encode([H | T], Encoded) when H >= $1 andalso H =< $9 -> plain_encode(T, E
 plain_encode([_ | T], Encoded) -> plain_encode(T, Encoded).
 
 insert_spaces([], Temp, Acc) -> Acc ++ Temp;
-insert_spaces([H | T], Temp, Acc) ->
-  case string:length(Temp) == 5 of
-    false -> insert_spaces(T, Temp ++ [H], Acc);
-    _ -> insert_spaces(T, [H], Acc ++ Temp ++ [$ ])
-  end.
+insert_spaces([H | T], Temp, Acc) when length(Temp) == 5 -> insert_spaces(T, [H], Acc ++ Temp ++ [$ ]);
+insert_spaces([H | T], Temp, Acc) -> insert_spaces(T, Temp ++ [H], Acc).
 
 decode(String) -> decode(String, "").
 
