@@ -9,12 +9,9 @@ convert(Number) ->
     Str -> Str
   end.
 
-convert(Number, Factor) ->
-  case Factor of
-    3 when Number rem 3 == 0 -> "Pling";
-    5 when Number rem 5 == 0 -> "Plang";
-    7 when Number rem 7 == 0 -> "Plong";
-    _ -> ""
-  end.
+convert(Number, 3) when Number rem 3 == 0 -> "Pling";
+convert(Number, 5) when Number rem 5 == 0 -> "Plang";
+convert(Number, 7) when Number rem 7 == 0 -> "Plong";
+convert(_, _) -> "".
 
 test_version() -> 1.

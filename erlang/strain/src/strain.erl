@@ -5,14 +5,11 @@
 keep(Fn, List) -> strain(Fn, List, [], true).
 discard(Fn, List) -> strain(Fn, List, [], false).
 
-strain(Fn, List, Acc, Cond) ->
-  case List of
-    [] -> Acc;
-    [H | T] ->
-      case Fn(H) of
-        Cond -> strain(Fn, T, Acc ++ [H], Cond);
-        _ -> strain(Fn, T, Acc, Cond)
-      end
+strain(_, [], Acc, _) -> Acc;
+strain(Fn, [H | T], Acc, Cond) ->
+  case Fn(H) of
+    Cond -> strain(Fn, T, Acc ++ [H], Cond);
+    _ -> strain(Fn, T, Acc, Cond)
   end.
 
 test_version() -> 1.
